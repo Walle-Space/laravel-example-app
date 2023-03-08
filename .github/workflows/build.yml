@@ -7,6 +7,9 @@ on:
       - "*" # triggers only if push new tag version
   workflow_dispatch:
 
+permissions:
+  packages: write
+
 jobs:
   docker-release:
     runs-on: ubuntu-latest
@@ -51,7 +54,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/${{ github.repository_owner }}/laravel-example-app
+            ghcr.io/${{ github.repository_owner }}/laravel-example-app/laravel-example-app
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
